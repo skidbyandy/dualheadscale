@@ -33,7 +33,7 @@ services:
     networks:
       - headscale_network
     ports:
-      - "8443:443"  # Map host 8443 to container 443
+      - "8443:8443"  # Map host 8443 to container 443
       - "3479:3479/udp" # STUN (B)
       - "3479:3479/tcp" # STUN (B)
       - "9091:9091"    # Metrics (B)
