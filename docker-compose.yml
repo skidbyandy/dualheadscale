@@ -1,0 +1,50 @@
+networks:
+  headscale_network:
+    driver: bridge
+
+services:
+  # Headscale A (with DERP and HTTPS)
+  headscale-a:
+    image: headscale/headscale:latest
+    container_name: headscale-a
+    restart: unless-stopped
+    networks:
+      - headscale_network
+    ports:
+      - "443:443"  # HTTPS
+      - "3478:3478/udp" # STUN (A)
+      - "3478:3478/tcp" # STUN (A)
+      - "9090:9090"    # Metrics (A)
+    volumes:
+      - ./headscale-a/config:/etc/headscale
+      - ./headscale-a/data:/var/lib/headscale
+      - /etc/letsencrypt/live/xfx2.duckdns.org:/etc/letsencrypt/live/xfx2.duckdns.org:ro
+      - /etc/letsencrypt/archive/xfx2.duckdns.org:/etc/letsencrypt/archive/xfx2.duckdns.org:ro
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    command: serve
+
+  # Headscale B (with DERP and HTTPS)
+  headscale-b:
+    image: headscale/headscale:latest
+    container_name: headscale-b
+    restart: unless-stopped
+    networks:
+      - headscale_network
+    ports:
+      - "8443:443"  # Map host 8443 to container 443
+      - "3479:3479/udp" # STUN (B)
+      - "3479:3479/tcp" # STUN (B)
+      - "9091:9091"    # Metrics (B)
+    volumes:
+      - ./headscale-b/config:/etc/headscale
+      - ./headscale-b/data:/var/lib/headscale
+      - /etc/letsencrypt/live/xfx2.duckdns.org:/etc/letsencrypt/live/xfx2.duckdns.org:ro
+      - /etc/letsencrypt/archive/xfx2.duckdns.org:/etc/letsencrypt/archive/xfx2.duckdns.org:ro
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    command: serve
+
+
