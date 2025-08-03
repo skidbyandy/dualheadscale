@@ -1,0 +1,13 @@
+regions:
+  999:
+    regionid: 999
+    regioncode: "rad"
+    regionname: "google cloud"
+    nodes:
+      - name: 999
+        regionid: 999
+        hostname: xiaofushing.duckdns.org
+        ipv4: xiaofushing.duckdns.org
+        stunport: 3478
+        stunonly: false
+        derpport: 443
