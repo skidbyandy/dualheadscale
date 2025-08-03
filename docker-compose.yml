@@ -1,0 +1,26 @@
+services:
+  headscale:
+    image: headscale/headscale:latest
+    container_name: headscale
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+      - "3478:3478/udp"
+      - "41641:41641/udp"
+      - "9090:9090"
+    volumes:
+      - ./config:/etc/headscale
+      - ./lib:/var/lib/headscale
+      - ./run:/var/run/headscale
+    command: serve
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    networks:
+      - headscale-net
+
+networks:
+  headscale-net:
+    driver: bridge
