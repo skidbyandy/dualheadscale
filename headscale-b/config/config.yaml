@@ -10,7 +10,7 @@
 #
 # https://myheadscale.example.com:443
 #
-server_url: http://xiaofushing2.duckdns.org:8443
+server_url: https://xiaofushing2.duckdns.org:8443
 
 # Address to listen to / bind to on the server
 #
