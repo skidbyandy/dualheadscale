@@ -118,7 +118,7 @@ derp:
   # paths:
   #   - /etc/headscale/derp-example.yaml
   paths:
-      - /etc/headscale/derp-map.yaml
+  #    - /etc/headscale/derp-map.yaml
 
   # If enabled, a worker will be set up to periodically
   # refresh the given sources and update the derpmap

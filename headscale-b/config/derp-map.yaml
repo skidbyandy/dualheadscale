@@ -1,6 +1,5 @@
-# headscale-b/config/derp-map.yaml
 regions:
-  999:  # Must be a string with quotes
+  999:
     regionid: 999
     regioncode: "xiaofushing"
     regionname: "Xiaofushing DERP"
