@@ -10,7 +10,7 @@
 #
 # https://myheadscale.example.com:443
 #
-server_url: https://xfx2.duckdns.org
+server_url: https://xiaofx.duckdns.org
 
 # Address to listen to / bind to on the server
 #
@@ -218,8 +218,8 @@ tls_letsencrypt_challenge_type:
 tls_letsencrypt_listen: 
 
 ## Use already defined certificates:
-tls_cert_path: "/etc/letsencrypt/live/xfx2.duckdns.org/fullchain.pem"
-tls_key_path: "/etc/letsencrypt/live/xfx2.duckdns.org/privkey.pem"
+tls_cert_path: "/etc/letsencrypt/live/xiaofx.duckdns.org/fullchain.pem"
+tls_key_path: "/etc/letsencrypt/live/xiaofx.duckdns.org/privkey.pem"
 
 log:
   # Output formatting for logs: text or json
