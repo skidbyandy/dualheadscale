@@ -1,12 +1,13 @@
+# headscale-b/config/derp-map.yaml
 regions:
-  999:
+  "999":  # Must be a string with quotes
     regionid: 999
-    regioncode: xiaofushing
+    regioncode: "xiaofushing"
     regionname: "Xiaofushing DERP"
     nodes:
-      - name: rad
+      - name: "rad"
         regionid: 999
-        hostname: xiaofushing.duckdns.org
+        hostname: "xiaofushing.duckdns.org"
         stunport: 3478
         stunonly: false
         derpport: 443
