@@ -107,7 +107,6 @@ derp:
 
   # List of externally available DERP maps encoded in JSON
   urls:
-    - https://xiaofushing2.duckdns.org/derp
     - https://xiaofushing.duckdns.org/derp
     - https://controlplane.tailscale.com/derpmap/default
 
