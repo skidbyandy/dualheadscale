@@ -1,0 +1,23 @@
+networks:
+  headscale_network:
+    driver: bridge
+    
+services:
+  headscale-b:
+    image: headscale/headscale:latest
+    container_name: headscale-b
+    restart: unless-stopped
+    networks:
+      - headscale_network
+    ports:
+      - "8443:8443"
+      - "3479:3479/udp" # STUN (B)
+      - "3479:3479/tcp" # STUN (B)
+      - "9091:9091"    # Metrics (B)
+    volumes:
+      - ./headscale-b/config:/etc/headscale
+      - ./headscale-a/data/cache:/var/lib/headscale/cache
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    command: serve
