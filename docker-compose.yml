@@ -1,26 +1,43 @@
+networks:
+  headscale_network:
+    driver: bridge
+
 services:
-  headscale:
+  # Headscale A (with DERP and HTTPS)
+  headscale-a:
     image: headscale/headscale:latest
-    container_name: headscale
+    container_name: headscale-a
     restart: unless-stopped
+    networks:
+      - headscale_network
     ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-      - "3478:3478/udp"
-      - "41641:41641/udp"
-      - "9090:9090"
+      - "80:80"    # Web UI/API (A)
+      - "443:443"      # HTTPS (A)
+      - "3478:3478/udp" # STUN (A)
+      - "3478:3478/tcp" # STUN (A)
+      - "41641:41641/udp" # DERP (A)
+      - "9090:9090"    # Metrics (A)
     volumes:
-      - ./config:/etc/headscale
-      - ./lib:/var/lib/headscale
-      - ./run:/var/run/headscale
-    command: serve
+      - ./headscale-a/config:/etc/headscale
+      - ./headscale-a/data:/var/lib/headscale
     cap_add:
       - NET_ADMIN
       - NET_RAW
-    networks:
-      - headscale-net
+    command: serve
 
-networks:
-  headscale-net:
-    driver: bridge
+  # Headscale B (HTTP only, uses A's DERP)
+  headscale-b:
+    image: headscale/headscale:latest
+    container_name: headscale-b
+    restart: unless-stopped
+    networks:
+      - headscale_network
+    ports:
+      - "8080:8080"    # Web UI/API (B)
+    volumes:
+      - ./headscale-b/config:/etc/headscale
+      - ./headscale-b/data:/var/lib/headscale
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    command: serve
